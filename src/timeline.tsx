@@ -10,6 +10,7 @@ import Image from "next/image";
 import { Courier_Prime } from "next/font/google";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
+import FloatingNavigation from "./floating-navigation";
 
 const courierPrime = Courier_Prime({
   subsets: ["latin"],
@@ -286,17 +287,17 @@ const Timeline = () => {
 
   return (
     <div
-      className={`${courierPrime.className} font-serif py-6 px-4 transition-all duration-500 ease-in-out`}
+      className={`${courierPrime.className} font-serif py-6 px-4 transition-all duration-300 ease-in-out`}
       style={{ backgroundColor: theme.background }}
     >
       <h1
-        className="text-3xl font-bold mb-2 text-center transition-colors duration-500"
+        className="text-3xl font-bold mb-2 text-center transition-colors duration-300"
         style={{ color: theme.title }}
       >
         Our story
       </h1>
       <p
-        className="text-center mb-8 transition-colors duration-500"
+        className="text-center mb-8 transition-colors duration-300"
         style={{ color: theme.subtitle }}
       >
         The journey of two brothers teaming up to build something meaningful.
@@ -308,7 +309,7 @@ const Timeline = () => {
       />
 
       <div
-        className="max-w-xl mx-auto p-6 hidden md:block transition-all duration-500"
+        className="max-w-xl mx-auto p-6 hidden md:block transition-all duration-300"
         style={{
           background: theme.cardBg,
           boxShadow: "0 8px 25px rgba(0,0,0,0.15)",
@@ -321,7 +322,7 @@ const Timeline = () => {
       <VerticalTimeline layout="2-columns">
         <VerticalTimelineElement
           className={cn(
-            "vertical-timeline-element--work transform md:hidden transition-all duration-500",
+            "vertical-timeline-element--work transform md:hidden transition-all duration-300",
             timelineData[0].arrowDirection === "right"
               ? "-rotate-1"
               : "rotate-1"
@@ -331,17 +332,18 @@ const Timeline = () => {
             color: theme.text,
             boxShadow: "0 8px 25px rgba(0,0,0,0.15)",
             borderRadius: "12px",
-            transition: "all 0.5s ease-in-out",
+            transition: "all 0.3s ease-in-out",
           }}
           date={timelineData[0].date}
           iconStyle={{
             background: theme.primary,
             color: "#fff",
-            transition: "all 0.5s ease-in-out",
+            transition: "all 0.3s ease-in-out",
           }}
           icon={<WorkflowIcon />}
           contentArrowStyle={{
             borderRight: `7px solid ${theme.cardBg}`,
+            transition: "all 0.3s ease-in-out",
           }}
         >
           <TimelineCard item={timelineData[0]} priority theme={theme} />
@@ -350,7 +352,7 @@ const Timeline = () => {
           <VerticalTimelineElement
             key={index}
             className={cn(
-              "vertical-timeline-element--work transform transition-all duration-500",
+              "vertical-timeline-element--work transform transition-all duration-300",
               item.arrowDirection === "right" ? "-rotate-1" : "rotate-1"
             )}
             contentStyle={{
@@ -358,17 +360,18 @@ const Timeline = () => {
               color: theme.text,
               boxShadow: "0 8px 25px rgba(0,0,0,0.15)",
               borderRadius: "12px",
-              transition: "all 0.5s ease-in-out",
+              transition: "all 0.3s ease-in-out",
             }}
             date={item.date}
             iconStyle={{
               background: theme.primary,
               color: "#fff",
-              transition: "all 0.5s ease-in-out",
+              transition: "all 0.3s ease-in-out",
             }}
             icon={<WorkflowIcon />}
             contentArrowStyle={{
               borderRight: `7px solid ${theme.cardBg}`,
+              transition: "all 0.3s ease-in-out",
             }}
           >
             <TimelineCard item={item} priority={index < 2} theme={theme} />
@@ -379,11 +382,12 @@ const Timeline = () => {
           iconStyle={{
             background: theme.primary,
             color: "#fff",
-            transition: "all 0.5s ease-in-out",
+            transition: "all 0.3s ease-in-out",
           }}
           icon={<WorkflowIcon />}
         />
       </VerticalTimeline>
+      <FloatingNavigation />
     </div>
   );
 };
