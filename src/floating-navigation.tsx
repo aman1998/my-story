@@ -1,10 +1,12 @@
 import {
   BookOpen,
   CardSim,
+  Eye,
   FileUp,
   Palette,
   Plus,
   Settings,
+  Share,
 } from "lucide-react";
 import { FloatingDock } from "./ui/floating-dock";
 
@@ -25,6 +27,13 @@ const links = [
     href: "#",
   },
   {
+    title: "Preview",
+    icon: (
+      <Eye className="h-full w-full text-neutral-500 dark:text-neutral-300" />
+    ),
+    href: "#",
+  },
+  {
     title: "Add card",
     icon: (
       <Plus className="h-full w-full text-neutral-500 dark:text-neutral-300" />
@@ -38,10 +47,11 @@ const links = [
     ),
     href: "#",
   },
+
   {
-    title: "Color theme",
+    title: "Share",
     icon: (
-      <Palette className="h-full w-full text-neutral-500 dark:text-neutral-300" />
+      <Share className="h-full w-full text-neutral-500 dark:text-neutral-300" />
     ),
     href: "#",
   },
