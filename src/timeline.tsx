@@ -198,7 +198,7 @@ const TimelineCard = ({
   return (
     <div>
       <div
-        className={`w-full relative h-80 ${item.imageBgColor} rounded-t-lg mb-4 flex items-center justify-center ${item.textColor} overflow-hidden`}
+        className={`w-full relative h-80 ${item.imageBgColor} rounded-lg mb-4 flex items-center justify-center ${item.textColor} overflow-hidden`}
       >
         {item.imageUrl ? (
           <Image
@@ -236,24 +236,45 @@ const ThemeSelector = ({
   onThemeChange: (theme: keyof typeof themes) => void;
 }) => {
   return (
-    <div className="flex flex-wrap gap-2 justify-center mb-6">
-      {Object.keys(themes).map((themeKey) => (
-        <button
-          key={themeKey}
-          onClick={() => onThemeChange(themeKey as keyof typeof themes)}
-          className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
-            currentTheme === themeKey
-              ? "ring-2 ring-offset-2"
-              : "hover:scale-105"
-          }`}
-          style={{
-            backgroundColor: themes[themeKey as keyof typeof themes].primary,
-            color: "#ffffff",
-          }}
-        >
-          {themeKey.charAt(0).toUpperCase() + themeKey.slice(1)}
-        </button>
-      ))}
+    <div className="flex flex-wrap gap-3 justify-center mb-8">
+      {Object.keys(themes).map((themeKey) => {
+        const theme = themes[themeKey as keyof typeof themes];
+        const isActive = currentTheme === themeKey;
+
+        return (
+          <button
+            key={themeKey}
+            onClick={() => onThemeChange(themeKey as keyof typeof themes)}
+            className={`px-6 py-3 rounded-xl text-sm font-medium transition-all duration-300 transform ${
+              isActive
+                ? "ring-4 ring-offset-2 scale-110 shadow-lg"
+                : "hover:scale-105 hover:shadow-md"
+            }`}
+            style={{
+              background: isActive
+                ? `linear-gradient(135deg, ${theme.primary}, ${theme.primary}dd)`
+                : theme.primary,
+              color: "#ffffff",
+              boxShadow: isActive
+                ? `0 10px 25px ${theme.primary}40`
+                : "0 4px 12px rgba(0,0,0,0.1)",
+            }}
+          >
+            <span className="flex items-center gap-2">
+              <div
+                className="w-3 h-3 rounded-full"
+                style={{
+                  backgroundColor: isActive ? "#ffffff" : theme.background,
+                  boxShadow: isActive
+                    ? "0 0 8px rgba(255,255,255,0.8)"
+                    : "none",
+                }}
+              />
+              {themeKey.charAt(0).toUpperCase() + themeKey.slice(1)}
+            </span>
+          </button>
+        );
+      })}
     </div>
   );
 };
@@ -265,16 +286,19 @@ const Timeline = () => {
 
   return (
     <div
-      className={`${courierPrime.className} font-serif py-6 px-4`}
+      className={`${courierPrime.className} font-serif py-6 px-4 transition-all duration-500 ease-in-out`}
       style={{ backgroundColor: theme.background }}
     >
       <h1
-        className="text-3xl font-bold mb-2 text-center"
+        className="text-3xl font-bold mb-2 text-center transition-colors duration-500"
         style={{ color: theme.title }}
       >
         Our story
       </h1>
-      <p className="text-center mb-8" style={{ color: theme.subtitle }}>
+      <p
+        className="text-center mb-8 transition-colors duration-500"
+        style={{ color: theme.subtitle }}
+      >
         The journey of two brothers teaming up to build something meaningful.
       </p>
 
@@ -284,7 +308,7 @@ const Timeline = () => {
       />
 
       <div
-        className="max-w-xl mx-auto p-6 hidden md:block"
+        className="max-w-xl mx-auto p-6 hidden md:block transition-all duration-500"
         style={{
           background: theme.cardBg,
           boxShadow: "0 8px 25px rgba(0,0,0,0.15)",
@@ -297,7 +321,7 @@ const Timeline = () => {
       <VerticalTimeline layout="2-columns">
         <VerticalTimelineElement
           className={cn(
-            "vertical-timeline-element--work transform md:hidden",
+            "vertical-timeline-element--work transform md:hidden transition-all duration-500",
             timelineData[0].arrowDirection === "right"
               ? "-rotate-1"
               : "rotate-1"
@@ -307,10 +331,18 @@ const Timeline = () => {
             color: theme.text,
             boxShadow: "0 8px 25px rgba(0,0,0,0.15)",
             borderRadius: "12px",
+            transition: "all 0.5s ease-in-out",
           }}
           date={timelineData[0].date}
-          iconStyle={{ background: theme.primary, color: "#fff" }}
+          iconStyle={{
+            background: theme.primary,
+            color: "#fff",
+            transition: "all 0.5s ease-in-out",
+          }}
           icon={<WorkflowIcon />}
+          contentArrowStyle={{
+            borderRight: `7px solid ${theme.cardBg}`,
+          }}
         >
           <TimelineCard item={timelineData[0]} priority theme={theme} />
         </VerticalTimelineElement>
@@ -318,7 +350,7 @@ const Timeline = () => {
           <VerticalTimelineElement
             key={index}
             className={cn(
-              "vertical-timeline-element--work transform",
+              "vertical-timeline-element--work transform transition-all duration-500",
               item.arrowDirection === "right" ? "-rotate-1" : "rotate-1"
             )}
             contentStyle={{
@@ -326,17 +358,29 @@ const Timeline = () => {
               color: theme.text,
               boxShadow: "0 8px 25px rgba(0,0,0,0.15)",
               borderRadius: "12px",
+              transition: "all 0.5s ease-in-out",
             }}
             date={item.date}
-            iconStyle={{ background: theme.primary, color: "#fff" }}
+            iconStyle={{
+              background: theme.primary,
+              color: "#fff",
+              transition: "all 0.5s ease-in-out",
+            }}
             icon={<WorkflowIcon />}
+            contentArrowStyle={{
+              borderRight: `7px solid ${theme.cardBg}`,
+            }}
           >
             <TimelineCard item={item} priority={index < 2} theme={theme} />
           </VerticalTimelineElement>
         ))}
 
         <VerticalTimelineElement
-          iconStyle={{ background: theme.primary, color: "#fff" }}
+          iconStyle={{
+            background: theme.primary,
+            color: "#fff",
+            transition: "all 0.5s ease-in-out",
+          }}
           icon={<WorkflowIcon />}
         />
       </VerticalTimeline>
