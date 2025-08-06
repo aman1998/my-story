@@ -94,7 +94,7 @@ const timelineData: TimelineItem[] = [
 const Timeline = () => {
   return (
     <div className={`${courierPrime.className} font-serif`}>
-      <VerticalTimeline>
+      <VerticalTimeline layout="2-columns">
         {timelineData.map((item, index) => (
           <VerticalTimelineElement
             key={index}
