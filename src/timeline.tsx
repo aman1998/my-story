@@ -201,7 +201,7 @@ const TimelineCard = ({
   return (
     <div>
       <div
-        className={`w-full relative h-80 ${item.imageBgColor} rounded-lg mb-4 flex items-center justify-center ${item.textColor} overflow-hidden`}
+        className={`w-full relative h-40 md:h-80 ${item.imageBgColor} rounded-lg mb-4 flex items-center justify-center ${item.textColor} overflow-hidden`}
       >
         {item.imageUrl ? (
           <Image
