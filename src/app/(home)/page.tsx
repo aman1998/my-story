@@ -1,5 +1,3 @@
-import Timeline from "@/src/timeline";
+import HomeView from "@/src/views/HomeView";
 
-export default function Home() {
-  return <Timeline />;
-}
+export default HomeView;
