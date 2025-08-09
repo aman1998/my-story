@@ -1,6 +1,5 @@
 "use client";
 import React from "react";
-import Link from "next/link";
 
 export default function HomeLayout({
   auth,
@@ -11,7 +10,6 @@ export default function HomeLayout({
 }>) {
   return (
     <>
-      <Link href="/auth/login">Login</Link>
       {auth}
       {children}
     </>

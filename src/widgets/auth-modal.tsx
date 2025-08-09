@@ -10,10 +10,7 @@ import {
 
 export function AnimatedModalDemo() {
   return (
-    <Modal>
-      <ModalTrigger className="bg-black dark:bg-white dark:text-black text-white flex justify-center group/modal-btn">
-        open
-      </ModalTrigger>
+    <Modal open={true}>
       <ModalBody>
         <ModalContent>hello</ModalContent>
       </ModalBody>

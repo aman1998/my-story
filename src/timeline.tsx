@@ -11,7 +11,6 @@ import { Courier_Prime } from "next/font/google";
 import { cn } from "@/src/shared/utils/classnames";
 import { useState } from "react";
 import FloatingNavigation from "./floating-navigation";
-import { AnimatedModalDemo } from "./widgets/auth-modal";
 import { Button } from "./shared/ui/button";
 
 const courierPrime = Courier_Prime({
@@ -276,7 +275,6 @@ const Timeline = () => {
       className={`${courierPrime.className} font-serif py-6 px-4 transition-all duration-300 ease-in-out`}
       style={{ backgroundColor: theme.background }}
     >
-      <AnimatedModalDemo />
       <h1
         className="text-3xl font-bold mb-2 text-center transition-colors duration-300"
         style={{ color: theme.title }}

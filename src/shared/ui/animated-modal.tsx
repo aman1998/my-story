@@ -8,7 +8,6 @@ import React, {
   useEffect,
   useRef,
   useState,
-  FunctionComponent,
 } from "react";
 
 interface ModalContextType {
@@ -18,11 +17,24 @@ interface ModalContextType {
 
 const ModalContext = createContext<ModalContextType | undefined>(undefined);
 
-export const ModalProvider = ({ children }: { children: ReactNode }) => {
-  const [open, setOpen] = useState(false);
+export const ModalProvider = ({
+  children,
+  open: openProp,
+  setOpen: setOpenProp,
+}: {
+  children: ReactNode;
+  open?: boolean;
+  setOpen?: (open: boolean) => void;
+}) => {
+  const [open, setOpen] = useState(!!openProp);
+
+  const onOpenChange = (open: boolean) => {
+    setOpen(open);
+    setOpenProp?.(open);
+  };
 
   return (
-    <ModalContext.Provider value={{ open, setOpen }}>
+    <ModalContext.Provider value={{ open, setOpen: onOpenChange }}>
       {children}
     </ModalContext.Provider>
   );
@@ -36,8 +48,20 @@ export const useModal = () => {
   return context;
 };
 
-export function Modal({ children }: { children: ReactNode }) {
-  return <ModalProvider>{children}</ModalProvider>;
+export function Modal({
+  children,
+  open,
+  onOpenChange,
+}: {
+  children: ReactNode;
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
+}) {
+  return (
+    <ModalProvider open={open} setOpen={onOpenChange}>
+      {children}
+    </ModalProvider>
+  );
 }
 
 export const ModalTrigger = ({
@@ -91,13 +115,13 @@ export const ModalBody = ({
           }}
           animate={{
             opacity: 1,
-            backdropFilter: "blur(10px)",
+            backdropFilter: "blur(1px)",
           }}
           exit={{
             opacity: 0,
             backdropFilter: "blur(0px)",
           }}
-          className="fixed [perspective:800px] [transform-style:preserve-3d] inset-0 h-full w-full  flex items-center justify-center z-50"
+          className="fixed [perspective:800px] [transform-style:preserve-3d] h-full w-full  flex items-center justify-center z-50 fixed inset-0 z-50 bg-black/50"
         >
           <Overlay />
 
@@ -180,13 +204,13 @@ const Overlay = ({ className }: { className?: string }) => {
       }}
       animate={{
         opacity: 1,
-        backdropFilter: "blur(10px)",
+        backdropFilter: "blur(1px)",
       }}
       exit={{
         opacity: 0,
         backdropFilter: "blur(0px)",
       }}
-      className={`fixed inset-0 h-full w-full bg-background/50 z-50 ${className}`}
+      className={`fixed inset-0 h-full w-full bg-black/50 z-50 ${className}`}
     ></motion.div>
   );
 };

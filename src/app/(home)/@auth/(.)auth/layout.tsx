@@ -1,31 +1,22 @@
 "use client";
 import React from "react";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from "@shared/ui/dialog";
-import { RedirectType, useRouter } from "next/navigation";
+import { Modal, ModalBody, ModalContent } from "@shared/ui/animated-modal";
 
 const LoginLayout = ({ children }: { children: React.ReactNode }) => {
   const [open, setOpen] = React.useState(true);
 
-  const router = useRouter();
   const handleClose = () => {
     setOpen(false);
-    router.push("/", { scroll: false });
+    // router.push("/", { scroll: false });
+    window.location.href = "/";
   };
 
   return (
-    <Dialog open={open} onOpenChange={handleClose}>
-      <DialogContent>
-        <DialogHeader>
-          <DialogTitle>Auth</DialogTitle>
-        </DialogHeader>
-        {children}
-      </DialogContent>
-    </Dialog>
+    <Modal open={open} onOpenChange={handleClose}>
+      <ModalBody>
+        <ModalContent>{children}</ModalContent>
+      </ModalBody>
+    </Modal>
   );
 };
 

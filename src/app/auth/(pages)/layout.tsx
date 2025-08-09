@@ -1,33 +1,21 @@
 "use client";
 import React from "react";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from "@shared/ui/dialog";
+
 import HomeView from "@views/HomeView";
-import { useRouter } from "next/navigation";
+import { Modal, ModalBody, ModalContent } from "@shared/ui/animated-modal";
 
 const AuthLayout = ({ children }: { children: React.ReactNode }) => {
-  const [open, setOpen] = React.useState(true);
-  const router = useRouter();
-
   const handleClose = () => {
-    setOpen(false);
-    router.back();
+    window.location.href = "/";
   };
   return (
     <>
       <HomeView />
-      <Dialog open={open} onOpenChange={handleClose}>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>Auth</DialogTitle>
-          </DialogHeader>
-          {children}
-        </DialogContent>
-      </Dialog>
+      <Modal open={true} onOpenChange={handleClose}>
+        <ModalBody>
+          <ModalContent>{children}</ModalContent>
+        </ModalBody>
+      </Modal>
     </>
   );
 };
