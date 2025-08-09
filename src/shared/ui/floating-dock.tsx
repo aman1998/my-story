@@ -4,7 +4,7 @@
  * Mobile navbar is better positioned at bottom right.
  **/
 
-import { cn } from "@/lib/utils";
+import { cn } from "@/src/shared/utils/classnames";
 import { Menu } from "lucide-react";
 import {
   AnimatePresence,

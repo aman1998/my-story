@@ -8,7 +8,7 @@ import {
   Settings,
   Share,
 } from "lucide-react";
-import { FloatingDock } from "./ui/floating-dock";
+import { FloatingDock } from "./shared/ui/floating-dock";
 
 const links = [
   {

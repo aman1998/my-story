@@ -1,4 +1,4 @@
-import { LoaderTwo } from "@/src/ui/loader";
+import { LoaderTwo } from "@/src/shared/ui/loader";
 
 export default function Loading() {
   return (

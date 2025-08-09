@@ -8,9 +8,11 @@ import {
 import "react-vertical-timeline-component/style.min.css";
 import Image from "next/image";
 import { Courier_Prime } from "next/font/google";
-import { cn } from "@/lib/utils";
+import { cn } from "@/src/shared/utils/classnames";
 import { useState } from "react";
 import FloatingNavigation from "./floating-navigation";
+import { AnimatedModalDemo } from "./widgets/auth-modal";
+import { Button } from "./shared/ui/button";
 
 const courierPrime = Courier_Prime({
   subsets: ["latin"],
@@ -56,7 +58,7 @@ const themes = {
   },
   sunset: {
     background: "#fef3c7",
-    cardBg: "#ffffff",
+    cardBg: "#fefdf8",
     primary: "#f59e0b",
     text: "#374151",
     title: "#1f2937",
@@ -243,37 +245,21 @@ const ThemeSelector = ({
         const isActive = currentTheme === themeKey;
 
         return (
-          <button
+          <Button
             key={themeKey}
             onClick={() => onThemeChange(themeKey as keyof typeof themes)}
-            className={`px-6 py-3 rounded-xl text-sm font-medium transition-all duration-300 transform ${
-              isActive
-                ? "ring-4 ring-offset-2 scale-110 shadow-lg"
-                : "hover:scale-105 hover:shadow-md"
-            }`}
+            className={cn(isActive ? "scale-110 shadow-lg" : "hover:shadow-md")}
             style={{
               background: isActive
                 ? `linear-gradient(135deg, ${theme.primary}, ${theme.primary}dd)`
                 : theme.primary,
-              color: "#ffffff",
               boxShadow: isActive
                 ? `0 10px 25px ${theme.primary}40`
                 : "0 4px 12px rgba(0,0,0,0.1)",
             }}
           >
-            <span className="flex items-center gap-2">
-              <div
-                className="w-3 h-3 rounded-full"
-                style={{
-                  backgroundColor: isActive ? "#ffffff" : theme.background,
-                  boxShadow: isActive
-                    ? "0 0 8px rgba(255,255,255,0.8)"
-                    : "none",
-                }}
-              />
-              {themeKey.charAt(0).toUpperCase() + themeKey.slice(1)}
-            </span>
-          </button>
+            {themeKey.charAt(0).toUpperCase() + themeKey.slice(1)}
+          </Button>
         );
       })}
     </div>
@@ -290,6 +276,7 @@ const Timeline = () => {
       className={`${courierPrime.className} font-serif py-6 px-4 transition-all duration-300 ease-in-out`}
       style={{ backgroundColor: theme.background }}
     >
+      <AnimatedModalDemo />
       <h1
         className="text-3xl font-bold mb-2 text-center transition-colors duration-300"
         style={{ color: theme.title }}
