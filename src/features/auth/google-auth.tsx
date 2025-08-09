@@ -1,6 +1,7 @@
 "use client";
 
-import { createClient } from "@/src/shared/config/supabase/client";
+import { ROUTES } from "@/src/shared/config/routes";
+import { createClient } from "@shared/config/supabase/client";
 import { Button } from "@shared/ui/button";
 import { useState } from "react";
 
@@ -18,7 +19,7 @@ export const GoogleAuth = () => {
       const { error } = await supabase.auth.signInWithOAuth({
         provider,
         options: {
-          redirectTo: `${window.location.origin}/auth/callback?next=/protected`,
+          redirectTo: `${window.location.origin}/auth/callback?next=${ROUTES.lk}`,
         },
       });
 

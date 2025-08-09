@@ -16,6 +16,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { GoogleAuth } from "./google-auth";
+import { ROUTES } from "@shared/config/routes";
 
 export function LoginForm({
   className,
@@ -40,7 +41,7 @@ export function LoginForm({
       });
       if (error) throw error;
       // Update this route to redirect to an authenticated route. The user already has an active session.
-      router.push("/protected");
+      router.push(ROUTES.lk);
     } catch (error: unknown) {
       setError(error instanceof Error ? error.message : "An error occurred");
     } finally {

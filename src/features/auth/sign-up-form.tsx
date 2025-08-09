@@ -15,6 +15,7 @@ import { Label } from "@/src/shared/ui/label";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { ROUTES } from "@shared/config/routes";
 
 export function SignUpForm({
   className,
@@ -44,7 +45,7 @@ export function SignUpForm({
         email,
         password,
         options: {
-          emailRedirectTo: `${window.location.origin}/protected`,
+          emailRedirectTo: `${window.location.origin}${ROUTES.lk}`,
         },
       });
       if (error) throw error;

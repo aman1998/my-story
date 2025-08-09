@@ -1,5 +1,5 @@
 export const ROUTES = {
-  protected: "/protected",
+  lk: "/app",
   auth: "/auth",
   login: "/auth/login",
   signup: "/auth/signup",

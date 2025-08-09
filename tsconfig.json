@@ -19,12 +19,12 @@
       }
     ],
     "paths": {
-      "@/*": ["./*"],
       "@widgets/*": ["./src/widgets/*"],
       "@entities/*": ["./src/entities/*"],
       "@features/*": ["./src/features/*"],
       "@shared/*": ["./src/shared/*"],
-      "@views/*": ["./src/views/*"]
+      "@views/*": ["./src/views/*"],
+      "@/*": ["./*"] // TODO: remove this
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

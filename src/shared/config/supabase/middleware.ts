@@ -1,5 +1,6 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
+import { ROUTES } from "../routes";
 
 export async function updateSession(request: NextRequest) {
   let supabaseResponse = NextResponse.next({
@@ -46,7 +47,7 @@ export async function updateSession(request: NextRequest) {
       request.nextUrl.pathname === "/")
   ) {
     const url = request.nextUrl.clone();
-    url.pathname = "/protected";
+    url.pathname = ROUTES.lk;
     return NextResponse.redirect(url);
   }
 
