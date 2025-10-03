@@ -3,7 +3,8 @@
 import Image from "next/image";
 import { Button } from "@/src/shared/ui/button";
 import { cn } from "@/src/shared/utils/classnames";
-import { storyThemes, type StoryCategory } from "@/src/shared/config/story";
+import { type TStoryCategory } from "@entities/Story/model/types";
+import { storyThemes } from "@entities/Story/lib/config";
 import { BookOpen, Plus, Share2, Trash2, Pencil, Calendar } from "lucide-react";
 
 export interface StoryCardItem {
@@ -18,7 +19,7 @@ export interface StoryGroup {
   id: string;
   title: string;
   subtitle?: string;
-  category: StoryCategory;
+  category: TStoryCategory;
   items: StoryCardItem[];
 }
 

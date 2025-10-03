@@ -2,7 +2,8 @@
 
 import Image from "next/image";
 import { cn } from "@/src/shared/utils/classnames";
-import { storyThemes, type StoryCategory } from "@/src/shared/config/story";
+import { type TStoryCategory } from "@entities/Story/model/types";
+import { storyThemes } from "@entities/Story/lib/config";
 import {
   Briefcase,
   Heart,
@@ -20,7 +21,7 @@ export interface StoryItem {
   title: string;
   description: string;
   date: string;
-  category: StoryCategory;
+  category: TStoryCategory;
   coverUrl?: string;
   location?: string; // for travel
   progressPercent?: number; // for career
@@ -35,7 +36,7 @@ export interface StoryListProps {
   className?: string;
 }
 
-const CategoryIcon = ({ category }: { category: StoryCategory }) => {
+const CategoryIcon = ({ category }: { category: TStoryCategory }) => {
   const iconProps = { className: "w-4 h-4" } as const;
   switch (category) {
     case "career":

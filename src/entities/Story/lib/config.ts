@@ -1,19 +1,17 @@
-export type StoryCategory = "career" | "love" | "travel" | "family" | "hobbies";
+import { IStoryCategory, TStoryCategory } from "../model/types";
 
-export const storyThemes: Record<
-  StoryCategory,
-  {
-    background: string;
-    cardBg: string;
-    primary: string;
-    accent: string;
-    text: string;
-    title: string;
-    subtitle: string;
-    border: string;
-    radius: string;
-  }
-> = {
+export const storyThemes: Record<TStoryCategory, IStoryCategory> = {
+  default: {
+    background: "#F2F1EC",
+    cardBg: "#FEFDF8",
+    primary: "#B85C44",
+    accent: "#EAD6C7",
+    text: "#333333",
+    title: "#2C1810",
+    subtitle: "#6B7280",
+    border: "#E7E5E4",
+    radius: "14px",
+  },
   career: {
     background: "#F6F7FB",
     cardBg: "#FFFFFF",

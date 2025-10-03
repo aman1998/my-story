@@ -31,16 +31,10 @@ import { cn } from "@/src/shared/utils/classnames";
 import { useState } from "react";
 import FloatingNavigation from "./floating-navigation";
 import { Button } from "./shared/ui/button";
+import { TStoryCategory } from "@entities/Story/model/types";
+import { storyThemes } from "@entities/Story/lib/config";
 
 const inter = Inter({ subsets: ["latin"], weight: ["400", "600", "700"] });
-
-type StoryCategory =
-  | "default"
-  | "career"
-  | "love"
-  | "travel"
-  | "family"
-  | "hobbies";
 
 interface TimelineItem {
   date: string;
@@ -52,89 +46,6 @@ interface TimelineItem {
   textColor: string;
   arrowDirection: "left" | "right";
 }
-
-// Темы для категорий
-const themes: Record<
-  StoryCategory,
-  {
-    background: string;
-    cardBg: string;
-    primary: string;
-    accent: string;
-    text: string;
-    title: string;
-    subtitle: string;
-    border: string;
-    radius: string;
-  }
-> = {
-  default: {
-    background: "#F2F1EC",
-    cardBg: "#FEFDF8",
-    primary: "#B85C44",
-    accent: "#EAD6C7",
-    text: "#333333",
-    title: "#2C1810",
-    subtitle: "#6B7280",
-    border: "#E7E5E4",
-    radius: "14px",
-  },
-  career: {
-    background: "#F6F7FB",
-    cardBg: "#FFFFFF",
-    primary: "#7EA6F6",
-    accent: "#B7B6C1",
-    text: "#2F3747",
-    title: "#1E2A3A",
-    subtitle: "#6B7280",
-    border: "#E5E7EB",
-    radius: "12px",
-  },
-  love: {
-    background: "#FFF6F6",
-    cardBg: "#FFFFFF",
-    primary: "#F7A8B8",
-    accent: "#FFC7B2",
-    text: "#463C3C",
-    title: "#3B2D2D",
-    subtitle: "#8B6E6E",
-    border: "#FDE2E2",
-    radius: "18px",
-  },
-  travel: {
-    background: "#F3FAFF",
-    cardBg: "#FFFFFF",
-    primary: "#8ED1F9",
-    accent: "#6ADFD4",
-    text: "#24424A",
-    title: "#17363C",
-    subtitle: "#6A8A92",
-    border: "#DDECF2",
-    radius: "10px",
-  },
-  family: {
-    background: "#FFFBE8",
-    cardBg: "#FFFFFF",
-    primary: "#F7E27E",
-    accent: "#8FD29A",
-    text: "#3C3F2E",
-    title: "#2B2E20",
-    subtitle: "#767B63",
-    border: "#F5EFD0",
-    radius: "16px",
-  },
-  hobbies: {
-    background: "#FBF7FF",
-    cardBg: "#FFFFFF",
-    primary: "#B79CF7",
-    accent: "#FFB589",
-    text: "#2F2A3D",
-    title: "#231C33",
-    subtitle: "#756B8C",
-    border: "#ECE3FF",
-    radius: "14px",
-  },
-};
 
 const timelineData: TimelineItem[] = [
   {
@@ -243,7 +154,7 @@ const timelineData: TimelineItem[] = [
   },
 ];
 
-const CategoryIcon = ({ category }: { category: StoryCategory }) => {
+const CategoryIcon = ({ category }: { category: TStoryCategory }) => {
   const iconProps = { className: "w-5 h-5" } as const;
   switch (category) {
     case "default":
@@ -269,8 +180,8 @@ const TimelineCard = ({
 }: {
   item: TimelineItem;
   priority?: boolean;
-  theme: (typeof themes)[StoryCategory];
-  category: StoryCategory;
+  theme: (typeof storyThemes)[TStoryCategory];
+  category: TStoryCategory;
 }) => {
   const isPhotoForward = category === "travel";
   const isSoftRounded = category === "love" || category === "family";
@@ -459,10 +370,10 @@ const CategorySelector = ({
   current,
   onChange,
 }: {
-  current: StoryCategory;
-  onChange: (category: StoryCategory) => void;
+  current: TStoryCategory;
+  onChange: (category: TStoryCategory) => void;
 }) => {
-  const items: { key: StoryCategory; label: string }[] = [
+  const items: { key: TStoryCategory; label: string }[] = [
     { key: "default", label: "Default" },
     { key: "career", label: "Career" },
     { key: "love", label: "Love" },
@@ -475,7 +386,7 @@ const CategorySelector = ({
     <div className="flex flex-wrap items-center justify-center gap-2 mb-6">
       {items.map(({ key, label }) => {
         const active = current === key;
-        const t = themes[key];
+        const t = storyThemes[key];
         return (
           <Button
             key={key}
@@ -503,8 +414,8 @@ const CategorySelector = ({
 };
 
 const Timeline = () => {
-  const [category, setCategory] = useState<StoryCategory>("default");
-  const theme = themes[category];
+  const [category, setCategory] = useState<TStoryCategory>("default");
+  const theme = storyThemes[category];
 
   return (
     <div
